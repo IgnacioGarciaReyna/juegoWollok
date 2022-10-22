@@ -1,0 +1,27 @@
+import wollok.game.*
+import objetos.*
+import direcciones.*
+import contrarios.*
+
+program futbolito{
+	game.addVisual(lionel)
+	game.cellSize(40)
+	game.width(20)
+	game.height(5)
+	keyboard.enter().onPressDo({ game.say(lionel, "Vamos Argentina") })
+	keyboard.c().onPressDo({ lionel.cambiarCamiseta() })
+	keyboard.p().onPressDo({ lionel.patear() })
+	keyboard.b().onPressDo({ lionel.buscarla() })
+		// Movimientos de Lionel
+	keyboard.up().onPressDo({ lionel.mover(arriba) })
+	keyboard.down().onPressDo({ lionel.mover(abajo) })
+		// Llevar y soltar la pelota
+	keyboard.l().onPressDo({ lionel.llevarPelota() })
+	keyboard.s().onPressDo({ lionel.soltarPelota() })
+		// Empezar el juego
+	keyboard.t().onPressDo({ lionel.taquito() }) // taquito
+		// mover contrarios
+	game.onTick(400, "CONTRARIOS", { contrarios.agregarNuevo() })
+	game.onTick(175, "CONTRARIOS", { contrarios.avanzarTodos() })
+	game.start()
+}

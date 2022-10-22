@@ -1,0 +1,10 @@
+import wollok.game.*
+import objetos.*
+
+test "cambiar camiseta" {
+	assert.equals("lionel-titular.png", lionel.camiseta())
+	lionel.cambiarCamiseta()
+	assert.equals("lionel-suplente.png", lionel.camiseta())
+	lionel.cambiarCamiseta()
+	assert.equals("lionel-titular.png", lionel.camiseta())
+}

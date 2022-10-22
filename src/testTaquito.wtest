@@ -1,0 +1,22 @@
+import objetos.*
+import wollok.game.*
+
+test "taquitoSatisfactorio" {
+	assert.notThat(lionel.position() == pelota.position())
+	lionel.position(pelota.position())
+	lionel.taquito()
+	assert.notEquals(lionel.position().x(), pelota.position().x())
+}
+
+test "taquitoFallido lionel lejos de la pelota" {
+	assert.notThat(lionel.position() == pelota.position())
+	assert.throwsException({ lionel.taquito()})
+	assert.notThat(lionel.position() == pelota.position())
+}
+
+test "taquitoFallido lionel y pelota en borde" {
+	lionel.position(game.origin())
+	pelota.position(game.origin())
+	lionel.taquito()
+	assert.that(lionel.position() == pelota.position())
+}

@@ -1,0 +1,44 @@
+import objetos.*
+import wollok.game.*
+import direcciones.*
+
+test "patear" {
+	pelota.position(game.at(2, 5))
+	game.width(20)
+	assert.throwsException({ lionel.patear()})
+	lionel.buscarla()
+	lionel.patear()
+	assert.equals(game.at(5, 5), pelota.position())
+	lionel.buscarla()
+	lionel.patear()
+	lionel.buscarla()
+	lionel.patear()
+	lionel.buscarla()
+	lionel.patear()
+	lionel.buscarla()
+	lionel.patear()
+	lionel.buscarla()
+	lionel.patear()
+	assert.equals(game.at(19, 5), pelota.position())
+}
+
+test "Lionel se posiciona sobre la pelota y la lleva a otra posicion" {
+	lionel.position(pelota.position())
+	lionel.llevarPelota()
+	lionel.mover(izquierda)
+	lionel.mover(izquierda)
+	lionel.mover(arriba)
+	assert.equals(lionel.position(), pelota.position())
+}
+
+test "Lionel se posiciona sobre la pelota, la lleva a otra posicion y la suelta" {
+	lionel.position(pelota.position())
+	lionel.llevarPelota()
+	lionel.mover(arriba)
+	lionel.mover(izquierda)
+	lionel.mover(abajo)
+	assert.equals(lionel.position(), pelota.position())
+	lionel.soltarPelota()
+	lionel.mover(derecha)
+	assert.notEquals(lionel.position(), pelota.position())
+}
